@@ -7,6 +7,7 @@ const Input = React.forwardRef(function Input(
   const id = useId();
   return (
     <div className="w-full">
+      {/* label diya hai to label component display hoga */}
       {label && 
         <label className="inline-block mb-1 pl-2" htmlFor={id}>
           {label}
@@ -15,11 +16,10 @@ const Input = React.forwardRef(function Input(
       <input
         type={type}
         className={`px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full ${className}`}
-        ref={ref}
+        ref={ref} //refrence jo parent se liya hai usko pass as a prop
         {...props}
         id={id}
       />
-      {/* label diya hai to label component display hoga */}
     </div>
   );
 });

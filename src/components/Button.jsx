@@ -14,8 +14,8 @@ function Button({
       {...props}
     >
       {children}
-      {/* ye children kuch nhi hai bas button jahan call hoke text pass
-      hoga wo yahan a ajyegz */}
+      {/* ye children kuch nhi hai bas button jis component mai call hoke text pass
+      hoga wo text yahan display ho jayega */}
     </button>
   );
 }

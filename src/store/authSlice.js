@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//  this store is created to authenticate user
+
 const initialState = {
-  status: false,
-  userState: null,
+  status: false, // by default status is set to false ie user not authenticated to login
+  userData: null, // default there is no user data
 };
 
 const authSlice = createSlice({
@@ -10,19 +12,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.status = true;
-      state.userData = action.payload.userData;
+      state.status = true; // at login status is set to true
+      state.userData = action.payload.userData; // user data is served on login
     },
 
     logout: (state, action) => {
-      state.status - false;
+      // at logout set to default values
+      state.status = false;
       state.userData = null;
     },
-
-    // improvement: we can also create postSlice
   },
 });
 
-export const {login, logout} = authSlice.actions;
-
+export const { login, logout } = authSlice.actions; 
 export default authSlice.reducer;
