@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import authService from "../appwrite/auth";
+import authService from "../appwrite/auth.js";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../store/authSlice";
+import { login } from "../store/authSlice.js";
 import { Button, Input, Logo } from "./index.js";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,6 @@ function Signup() {
         const userData = await authService.getCurrentUSer();
         if (userData) dispatch(login(userData));
         navigate("/");
-      } else {
       }
     } catch (error) {
       setError(error.message);
@@ -79,6 +78,13 @@ function Signup() {
               placeholder="Enter your password"
               {...register("password", {
                 required: true,
+                validate: {
+                  matchPattern: (value) =>
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+                      value
+                    ) ||
+                    "Password must have 8 characters,one uppercase and one lowercase letter, one digit and one special character",
+                },
               })}
             />
             <Button type="submit" className="w-full">

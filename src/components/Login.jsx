@@ -9,20 +9,20 @@ import { useDispatch } from "react-redux";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [register, handleSubmit] = useForm();
+  const [register, handleSubmit] = useForm(); // handleSubmit is a method that takes your method as a param
   const [error, setError] = useState("");
 
   const login = async (data) => {
     setError("");
     try {
-      const session = await authService.login(data);
+      const session = await authService.login(data); // appwrite se login karaya
       if (session) {
         const userData = await authService.getCurrentUSer();
         if (userData) {
+          // agar user data aa gaya to call authlogin
           dispatch(authLogin(userData));
           navigate("/"); //agar user ki info aa gayi to wo login  ho gaya to usko home par bhej do
         }
-      } else {
       }
     } catch (error) {
       setError(error.message);
@@ -51,7 +51,7 @@ function Login() {
             Sign Up
           </Link>
         </p>
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 mt-8 text-center">{error}</p>}
         <form className="mt-8" onSubmit={handleSubmit(login)}>
           {/* handleSubmit is an event state manage nhi karta state apne app pick karta hai  */}
           <div className="space-y-5">
@@ -60,11 +60,13 @@ function Login() {
               placeholder="Enter Your Email" // ye placeholder field humne input mai nhi banayei hai alag se ye ...props mai jayegi
               type="email"
               {...register("email", {
+                //it is necesary to spread regiuster so it doesnt get overwritten when we use it somewhere else
+                // name such as email should be unique for all input fields as data is passe on basis of name
                 // is object mai options milte hain docmnttion pafho
                 required: true,
                 validate: {
                   matchPattern: (value) =>
-                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || //regex
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || //regex patter ke baad .test(value) jo bhi value pass higi will automatically be tested
                     "Email address must be a valid address",
                 },
               })} //har baar spread karo warna kahin aur register karenge to ye wali value overwrite ho jayegfi
@@ -76,9 +78,16 @@ function Login() {
               type="password"
               {...register("password", {
                 required: true,
+                validate: {
+                  matchPattern: (value) =>
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+                      value
+                    ) ||
+                    "Password must have 8 characters,one uppercase and one lowercase letter, one digit and one special character",
+                },
               })}
             ></Input>
-            <Button type="submit" classNamew-full>
+            <Button type="submit" className="w-full">
               Sign In
             </Button>
           </div>
