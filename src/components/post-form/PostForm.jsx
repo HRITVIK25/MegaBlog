@@ -5,9 +5,9 @@ import appwriteService from "../../appwrite/config.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function PostForm({post}) {
+function PostForm({ post }) {
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -17,14 +17,14 @@ function PostForm({post}) {
         status: post?.status || "active",
       },
     });
-    
+
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
         ? appwriteService.uploadFile(data.image[0])
         : null;
 
-      if (file) {7
+      if (file) {
         appwriteService.deleteFile(post.featuredImage);
       }
 
@@ -33,10 +33,9 @@ function PostForm({post}) {
         featuredImage: file ? file.$id : undefined,
       });
 
-      if(dbPost) {
+      if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
-      };
-
+      }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]);
 
@@ -45,10 +44,10 @@ function PostForm({post}) {
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
-          userid: userData.$id,
+          userId: userData.$id,
         });
         if (dbPost) {
-          navigate("/post/${dbPost.$id}");
+          navigate(`/post/${dbPost.$id}`);
         }
       }
     }
@@ -77,7 +76,6 @@ function PostForm({post}) {
     };
   }, [watch, slugTransform, setValue]);
 
-  
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">

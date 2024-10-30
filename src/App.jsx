@@ -7,7 +7,7 @@ import { Footer, Header } from "./components/index.js";
 import { Outlet } from "react-router-dom";
 
 function App() {
-  const { loading, setLoading } = useState(true); // this loading state has been created as it takes time to fetch dqata from DB so if loading is happening show loading sign else serve data using if-else
+  const [loading, setLoading] = useState(true); // this loading state has been created as it takes time to fetch dqata from DB so if loading is happening show loading sign else serve data using if-else
   const dispatch = useDispatch();
 
   useEffect(() => {

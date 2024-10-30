@@ -112,18 +112,18 @@ export class Service {
   async deleteFile(fileId) {
     try {
       await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
-      return true
+      return true;
     } catch (error) {
       console.log("APPWRITE DELETEFILE ERROR: ", error);
       return false;
     }
   }
 
-  getFilePreview(fileId){
+  getFilePreview(fileId) {
     try {
-      this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+      return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
     } catch (error) {
-      console.log("APPWRITE FILEPREVIEW ERROR: ",error);
+      console.log("APPWRITE FILEPREVIEW ERROR: ", error);
     }
   }
 }

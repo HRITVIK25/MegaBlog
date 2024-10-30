@@ -1,10 +1,10 @@
 import React from "react";
 import appwriteService from "../appwrite/config.js";
 import { Link } from "react-router-dom";
-
+import parse from "html-react-parser";
 function Postcard(
   // $id is appwrite syntax
-  { $id, title, featuredImage }
+  { $id, title, featuredImage, content }
 ) {
   return (
     <Link to={`/post/${$id}`}>
@@ -17,6 +17,8 @@ function Postcard(
           />
         </div>
         <h2 className="text-xl font-bold">{title}</h2>
+        <h4 className="text-xl font-bold">{parse(content)}</h4>  
+        {/* this parsing is done as appwrite pura element lautata hai like <P>example</P> to convert this to string example we parse */}
       </div>
     </Link>
   );

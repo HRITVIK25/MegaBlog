@@ -2,12 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth";
 import { logout } from "../../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function LogoutBtn() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const logoutHandler = () => {
     authService.logout().then(() => { // ye actual backend service call ho rhi hai
-      dispatch(logout()); //this is changing the state
+      dispatch(logout()) //this is changing the state
+      navigate("/signup")
     });
   };
   return (

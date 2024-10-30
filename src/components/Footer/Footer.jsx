@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import Logo from "../Logo";
+import LogoutBtn from "../Header/LogoutBtn";
 
 
 function Footer() {
@@ -131,6 +132,7 @@ function Footer() {
                   >
                     Licensing
                   </Link>
+                  <LogoutBtn />
                 </li>
               </ul>
             </div>
