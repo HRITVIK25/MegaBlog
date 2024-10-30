@@ -6,7 +6,7 @@ export class AuthService {
   account;
 
   constructor() {
-    // we added client and account to constructor so it is only crreated along with the ibject automatically
+    // we added client and account to constructor so it is only crreated along with the object automatically
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);

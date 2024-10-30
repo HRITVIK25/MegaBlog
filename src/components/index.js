@@ -8,4 +8,8 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import Postcard from "./Postcard"
-export { Header, Footer, Container, RTE, Logo, LogoutBtn, Signup, Login, PostForm, Postcard };
+import AuthLayout from "./AuthLayout"
+import Button from "./Button";
+import Select from "./Select"
+import Input from "./Input"
+export { Header, Footer, Container, RTE, Logo, LogoutBtn, Signup, Login, PostForm, Postcard, AuthLayout,Button,Input,Select };

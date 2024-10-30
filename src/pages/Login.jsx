@@ -5,6 +5,7 @@ function Login() {
   return (
     <div className='py-8'>
       Login
+      <LoginComponent />
     </div>
   )
 }

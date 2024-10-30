@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [register, handleSubmit] = useForm(); // handleSubmit is a method that takes your method as a param
+  const { register, handleSubmit } = useForm(); // handleSubmit is a method that takes your method as a param
   const [error, setError] = useState("");
 
   const login = async (data) => {
@@ -17,7 +17,7 @@ function Login() {
     try {
       const session = await authService.login(data); // appwrite se login karaya
       if (session) {
-        const userData = await authService.getCurrentUSer();
+        const userData = await authService.getCurrentUser();
         if (userData) {
           // agar user data aa gaya to call authlogin
           dispatch(authLogin(userData));

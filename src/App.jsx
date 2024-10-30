@@ -4,6 +4,7 @@ import "./App.css";
 import authService from "./appwrite/auth.js";
 import { login, logout } from "./store/authSlice.js";
 import { Footer, Header } from "./components/index.js";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const { loading, setLoading } = useState(true); // this loading state has been created as it takes time to fetch dqata from DB so if loading is happening show loading sign else serve data using if-else
@@ -11,7 +12,7 @@ function App() {
 
   useEffect(() => {
     authService
-      .getCurrentUSer()
+      .getCurrentUser()
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
@@ -27,7 +28,9 @@ function App() {
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
       <div className="w-full block">
         <Header />
-        <main>TODO: {/* <Outlet /> */}</main>
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>
